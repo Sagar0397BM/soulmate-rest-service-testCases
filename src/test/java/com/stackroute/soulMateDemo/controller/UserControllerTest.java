@@ -45,7 +45,7 @@ class UserControllerTest {
     @BeforeEach
     public void setUp()
     {
-         user= new User("John","Male",25);
+        user= new User(1,"John","Male",25);
         mockMvc= MockMvcBuilders.standaloneSetup(userController).build();
     }
     public  static String asJsonString(final Object obj) throws JsonProcessingException {

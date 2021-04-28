@@ -24,7 +24,7 @@ class UserRepositoryTest {
 
     @Test
     public void givenUserToSaveShouldReturnSavedUser(){
-        User user= new User("John","Male",25);
+        User user= new User(1,"John","Male",25);
         userRepository.save(user);
         User user1= userRepository.findById(user.getId()).get();
         assertNotNull(user1);
@@ -33,8 +33,8 @@ class UserRepositoryTest {
 
     @Test
     public  void listallTheUsers(){
-        User user= new User("John","Male",25);
-        User user1= new User("Lisa","Female",25);
+        User user= new User(1,"John","Male",25);
+        User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
         userRepository.save(user1);
         List<User> getAll=userRepository.findAll();
@@ -43,8 +43,8 @@ class UserRepositoryTest {
 
     @Test
     public void searchByName(){
-        User user= new User("John","Male",25);
-        User user1= new User("Lisa","Female",25);
+        User user= new User(1,"John","Male",25);
+        User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
         userRepository.save(user1);
         String name="John";
@@ -54,8 +54,8 @@ class UserRepositoryTest {
 
     @Test
     public void searchByGender(){
-        User user= new User("John","Male",25);
-        User user1= new User("Lisa","Female",25);
+        User user= new User(1,"John","Male",25);
+        User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
         userRepository.save(user1);
         String gender="Male";
@@ -66,8 +66,8 @@ class UserRepositoryTest {
     @Test
     @Rollback(value = false)
     public void delete(){
-        User user= new User("John","Male",25);
-        User user1= new User("Lisa","Female",25);
+        User user= new User(1,"John","Male",25);
+        User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
         userRepository.save(user1);
        int id=2;
@@ -78,8 +78,8 @@ class UserRepositoryTest {
 
     @Test
     public void updateUser(){
-        User user= new User("John","Male",25);
-        User user1= new User("Lisa","Female",25);
+        User user= new User(1,"John","Male",25);
+        User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
         userRepository.save(user1);
         int id=2;

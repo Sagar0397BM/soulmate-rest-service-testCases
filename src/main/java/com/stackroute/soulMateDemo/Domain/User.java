@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String gender;
@@ -17,8 +17,8 @@ public class User {
     public User() {
     }
 
-    public User(String name, String gender, int age) {
-
+    public User(int id,String name, String gender, int age) {
+        this.id=id;
         this.name = name;
         this.gender = gender;
         this.age = age;

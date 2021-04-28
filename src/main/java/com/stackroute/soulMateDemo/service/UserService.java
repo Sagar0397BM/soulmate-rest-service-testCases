@@ -1,6 +1,7 @@
 package com.stackroute.soulMateDemo.service;
 
 import com.stackroute.soulMateDemo.Domain.User;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
