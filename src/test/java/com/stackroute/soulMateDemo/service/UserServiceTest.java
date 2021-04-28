@@ -73,7 +73,7 @@ class UserServiceTest {
     }
     @Test
     public  void giveUserIdMustReturnSuccessOnDeletion(){
-        int id=2;
+        int id=1;
         User user= new User(1,"John","Male",25);
         userService.deleteUser(id);
         verify(userRepository,times(1)).deleteById(id);

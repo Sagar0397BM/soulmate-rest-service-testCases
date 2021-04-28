@@ -88,7 +88,7 @@ class UserControllerTest {
     public void giveUserIdMustReturnSuccessOnDeletion() throws Exception {
 
         when(userService.deleteUser(user.getId())).thenReturn("Success");
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/delete/0").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/delete/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(userService,times(1)).deleteUser(user.getId());
 

@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public List<User> searchUserByGender(String gender) {
+    public List<User> searchUserByGender(String gender){
         return userRepo.getAllUsersByGender(gender);
     }
 
