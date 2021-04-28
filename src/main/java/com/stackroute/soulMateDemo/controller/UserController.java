@@ -40,13 +40,13 @@ public class UserController {
         return new ResponseEntity<String>("Success",HttpStatus.OK);
     }
     @GetMapping("/users/{id}")
-    public User userById(@PathVariable int id) {
+    public User userById(@PathVariable int id) throws NoSuchElementException{
         Optional<User> user = userService.getUserById(id);
         return user.get();
     }
 
     @PutMapping("/users/update/{id}")
-    public ResponseEntity<User> updateById(@PathVariable int id,@RequestBody User user) {
+    public ResponseEntity<User> updateById(@PathVariable int id,@RequestBody User user) throws NoSuchElementException{
         userService.updateUser(id,user);
         return ResponseEntity.noContent().build();
     }

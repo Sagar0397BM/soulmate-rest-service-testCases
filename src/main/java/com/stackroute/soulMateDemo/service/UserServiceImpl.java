@@ -46,13 +46,20 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Optional<User> getUserById(int id) {
-        return userRepo.findById(id);
+    public Optional<User> getUserById(int id) throws NoSuchElementException{
+        Optional<User> myuser=userRepo.findById(id);
+        if(myuser.get().getId()!=id){
+            throw new NoSuchElementException();
+        }
+        return myuser;
     }
 
     @Override
-    public User updateUser(int id, User user) {
-        Optional<User> eachUser = userRepo.findById(id);
+    public User updateUser(int id, User user) throws NoSuchElementException{
+        Optional<User> myuser=userRepo.findById(id);
+        if(myuser.get().getId()!=id){
+            throw new NoSuchElementException();
+        }
         user.setId(id);
         return userRepo.save(user);
     }

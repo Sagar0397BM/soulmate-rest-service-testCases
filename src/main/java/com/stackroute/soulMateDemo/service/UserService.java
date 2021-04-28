@@ -16,8 +16,8 @@ public interface UserService {
     User saveUser(User user) throws UserAlradyExistsException;
     List<User> getAllUser();
     String deleteUser(int id) throws NoSuchElementException;
-    Optional<User> getUserById(int id);
-    User updateUser(int id,User user);
+    Optional<User> getUserById(int id)throws NoSuchElementException;;
+    User updateUser(int id,User user)throws NoSuchElementException;;
     List<User> searchUserByGender(String gender);
     List<User> searchUserByName(String name);
     List<User> searchUserByAge(int age);
