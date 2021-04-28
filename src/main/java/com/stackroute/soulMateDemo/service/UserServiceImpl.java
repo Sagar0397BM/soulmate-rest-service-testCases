@@ -1,6 +1,7 @@
 package com.stackroute.soulMateDemo.service;
 
 import com.stackroute.soulMateDemo.Domain.User;
+import com.stackroute.soulMateDemo.Exceptions.UserAlradyExistsException;
 import com.stackroute.soulMateDemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user) throws UserAlradyExistsException {
 
+        if(userRepo.existsById(user.getId())){
+            throw new UserAlradyExistsException();
+        }
         return userRepo.save(user);
     }
 

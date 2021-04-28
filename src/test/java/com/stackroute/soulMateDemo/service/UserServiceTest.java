@@ -2,6 +2,7 @@ package com.stackroute.soulMateDemo.service;
 
 import com.stackroute.soulMateDemo.Domain.User;
 
+import com.stackroute.soulMateDemo.Exceptions.UserAlradyExistsException;
 import com.stackroute.soulMateDemo.repository.UserRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
@@ -28,7 +29,7 @@ class UserServiceTest {
     private UserServiceImpl userService;
 
     @Test
-    public void givenUserToSaveShouldReturnSavedUser(){
+    public void givenUserToSaveShouldReturnSavedUser() throws UserAlradyExistsException {
         User user= new User(1,"John","Male",25);
         when(userRepository.save(any())).thenReturn(user);
         userService.saveUser(user);
