@@ -42,7 +42,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void searchByName(){
+    public void GiveUserNameMustReturnListOfUsers(){
         User user= new User(1,"John","Male",25);
         User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
@@ -53,7 +53,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void searchByGender(){
+    public void GiveUserGenderMustReturnListOfUsers(){
         User user= new User(1,"John","Male",25);
         User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
@@ -65,7 +65,7 @@ class UserRepositoryTest {
 
     @Test
     @Rollback(value = false)
-    public void delete(){
+    public void giveUserIdMustReturnSuccessOnDeletion(){
         User user= new User(1,"John","Male",25);
         User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);
@@ -77,7 +77,7 @@ class UserRepositoryTest {
     }
 
     @Test
-    public void updateUser(){
+    public void giveUserIdMustReturntheUpdateUser(){
         User user= new User(1,"John","Male",25);
         User user1= new User(2,"Lisa","Female",25);
         userRepository.save(user);

@@ -47,7 +47,7 @@ class UserServiceTest {
 
     }
     @Test
-    public  void UserbyName(){
+    public  void GiveUserNameMustReturnListOfUsers(){
         String name="John";
         when(userRepository.getAllUsersByName(name)).thenReturn(Stream.of(new
         User(1,"John","Male",25)).collect(Collectors.toList()));
@@ -55,7 +55,7 @@ class UserServiceTest {
 
     }
     @Test
-    public  void UserbyGender(){
+    public  void GiveUserGenderMustReturnListOfUsers(){
         String gender="Male";
         when(userRepository.getAllUsersByGender(gender)).thenReturn(Stream.of(new
                 User(1,"John","Male",25)).collect(Collectors.toList()));
@@ -64,7 +64,7 @@ class UserServiceTest {
     }
 
     @Test
-    public  void UserbyAge(){
+    public  void GiveUserAgeMustReturnListOfUsers(){
         int age=25;
         when(userRepository.getAllUsersByAge(age)).thenReturn(Stream.of(new
                 User(1,"John","Male",25)).collect(Collectors.toList()));
@@ -72,7 +72,7 @@ class UserServiceTest {
 
     }
     @Test
-    public  void deleteUser(){
+    public  void giveUserIdMustReturnSuccessOnDeletion(){
         int id=2;
         User user= new User(1,"John","Male",25);
         userService.deleteUser(id);

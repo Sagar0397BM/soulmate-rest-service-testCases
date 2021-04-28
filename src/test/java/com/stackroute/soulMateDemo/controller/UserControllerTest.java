@@ -63,7 +63,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void getAllTheUsersInList() throws Exception {
+    public void givenUserMustReturnAllTheUsersInList() throws Exception {
         when(userService.getAllUser()).thenReturn(userList);
         mockMvc.perform(get("/api/v1/users")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -74,7 +74,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void UpdateUser() throws Exception {
+    public void giveUserIdMustReturntheUpdateUser() throws Exception {
         when(userService.updateUser(anyInt(),any())).thenReturn(user);
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/users/update/0")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -85,7 +85,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void DeleteUser() throws Exception {
+    public void giveUserIdMustReturnSuccessOnDeletion() throws Exception {
 
         when(userService.deleteUser(user.getId())).thenReturn("Success");
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/delete/0").contentType(MediaType.APPLICATION_JSON))
@@ -95,7 +95,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void GetuserByName() throws Exception {
+    public void GiveUserNameMustReturnListOfUsers() throws Exception {
 
         when(userService.searchUserByName(anyString())).thenReturn(userList);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/name?name=John").contentType(MediaType.APPLICATION_JSON))
@@ -105,7 +105,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void GetuserByGender() throws Exception {
+    public void GiveUserGenderMustReturnListOfUsers() throws Exception {
 
         when(userService.searchUserByGender(anyString())).thenReturn(userList);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/gender?genderType=Male").contentType(MediaType.APPLICATION_JSON))
@@ -115,7 +115,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void GetuserByAge() throws Exception {
+    public void GiveUserAgeMustReturnListOfUsers() throws Exception {
 
         when(userService.searchUserByAge(anyInt())).thenReturn(userList);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1//users/search/25").contentType(MediaType.APPLICATION_JSON))
