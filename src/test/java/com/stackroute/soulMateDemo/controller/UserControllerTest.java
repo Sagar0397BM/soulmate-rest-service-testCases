@@ -25,8 +25,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,7 +45,7 @@ class UserControllerTest {
     @BeforeEach
     public void setUp()
     {
-        user= user= new User("John","Male",25);
+         user= new User("John","Male",25);
         mockMvc= MockMvcBuilders.standaloneSetup(userController).build();
     }
     public  static String asJsonString(final Object obj) throws JsonProcessingException {
@@ -74,8 +73,55 @@ class UserControllerTest {
 
     }
 
+    @Test
+    public void UpdateUser() throws Exception {
+        when(userService.updateUser(anyInt(),any())).thenReturn(user);
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/users/update/0")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(user)))
+                .andExpect(status().isNoContent());
+        verify(userService, times(1)).updateUser(anyInt(),any());
 
+    }
 
+    @Test
+    public void DeleteUser() throws Exception {
 
+        when(userService.deleteUser(user.getId())).thenReturn("Success");
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/delete/0").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(userService,times(1)).deleteUser(user.getId());
+
+    }
+
+    @Test
+    public void GetuserByName() throws Exception {
+
+        when(userService.searchUserByName(anyString())).thenReturn(userList);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/name?name=John").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(userService,times(1)).searchUserByName(anyString());
+
+    }
+
+    @Test
+    public void GetuserByGender() throws Exception {
+
+        when(userService.searchUserByGender(anyString())).thenReturn(userList);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/users/gender?genderType=Male").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(userService,times(1)).searchUserByGender(anyString());
+
+    }
+
+    @Test
+    public void GetuserByAge() throws Exception {
+
+        when(userService.searchUserByAge(anyInt())).thenReturn(userList);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1//users/search/25").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(userService,times(1)).searchUserByAge(anyInt());
+
+    }
 
 }

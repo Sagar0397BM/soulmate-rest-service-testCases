@@ -11,7 +11,7 @@ public interface UserService {
 
     User saveUser(User user);
     List<User> getAllUser();
-    void deleteUser(int id);
+    String deleteUser(int id);
     Optional<User> getUserById(int id);
     User updateUser(int id,User user);
     List<User> searchUserByGender(String gender);

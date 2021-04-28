@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUser(int id) {
-
+    public String deleteUser(int id) {
         userRepo.deleteById(id);
+        return "Success";
     }
 
     @Override

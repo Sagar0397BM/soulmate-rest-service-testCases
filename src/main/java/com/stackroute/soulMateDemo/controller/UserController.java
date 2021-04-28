@@ -31,9 +31,9 @@ public class UserController {
         return  new ResponseEntity<List<User>>((List<User>) userService.getAllUser(),HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public String deleteUserById(@PathVariable int id){
+    public ResponseEntity<String> deleteUserById(@PathVariable int id){
         userService.deleteUser(id);
-        return "User deleted successfully!!!";
+        return new ResponseEntity<String>("Success",HttpStatus.OK);
     }
     @GetMapping("/users/{id}")
     public User userById(@PathVariable int id) {
