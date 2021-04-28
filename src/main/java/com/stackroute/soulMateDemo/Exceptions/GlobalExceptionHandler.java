@@ -15,6 +15,11 @@ public class GlobalExceptionHandler {
     @Value(value = "${data.exception.message2}")
     private String message2;
 
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<Object> databaseConnectionFailsException(Exception exception) {
+        return new ResponseEntity<>("Database connectivity is lost", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
     @ExceptionHandler(value = UserAlradyExistsException.class)
     public ResponseEntity<String> userExistException(){
         return new ResponseEntity<>(message1, HttpStatus.CONFLICT);
