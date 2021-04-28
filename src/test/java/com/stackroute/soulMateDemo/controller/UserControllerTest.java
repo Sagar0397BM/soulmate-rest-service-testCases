@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -23,10 +25,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 class UserControllerTest {
 
     @Autowired
@@ -46,7 +49,9 @@ class UserControllerTest {
         user= user= new User("John","Male",25);
         mockMvc= MockMvcBuilders.standaloneSetup(userController).build();
     }
-
+    public  static String asJsonString(final Object obj) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(obj);
+    }
     @Test
     public void givenUserToSaveShouldReturnSavedUser() throws Exception {
         when(userService.saveUser(any())).thenReturn(user);
@@ -57,7 +62,20 @@ class UserControllerTest {
         verify(userService, times(1)).saveUser(any());
 
     }
-    public  static String asJsonString(final Object obj) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(obj);
+
+    @Test
+    public void getAllTheUsersInList() throws Exception {
+        when(userService.getAllUser()).thenReturn(userList);
+        mockMvc.perform(get("/api/v1/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(user)))
+                .andExpect(status().isOk());
+        verify(userService, times(1)).getAllUser();
+
     }
+
+
+
+
+
 }

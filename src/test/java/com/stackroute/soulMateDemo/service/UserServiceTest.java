@@ -11,6 +11,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -44,16 +46,36 @@ class UserServiceTest {
 
     }
     @Test
-    public  void DeleteUserbyId(){
+    public  void UserbyName(){
+        String name="John";
+        when(userRepository.getAllUsersByName(name)).thenReturn(Stream.of(new
+        User("John","Male",25)).collect(Collectors.toList()));
+        assertEquals(1,userService.searchUserByName(name).size());
 
-        User user= new User("John","Male",25);
-        userRepository.save(user);
-        List <User> userList = userService.getAllUser();
-        int id=1;
-        when(userRepository.save(any())).thenReturn(user);
-        assertEquals(userList,userList);
-        verify(userRepository,times(1)).save(user);
-        verify(userRepository,times(1)).findAll();
+    }
+    @Test
+    public  void UserbyGender(){
+        String gender="Male";
+        when(userRepository.getAllUsersByGender(gender)).thenReturn(Stream.of(new
+                User("John","Male",25)).collect(Collectors.toList()));
+        assertEquals(1,userService.searchUserByGender(gender).size());
+
     }
 
+    @Test
+    public  void UserbyAge(){
+        int age=25;
+        when(userRepository.getAllUsersByAge(age)).thenReturn(Stream.of(new
+                User("John","Male",25)).collect(Collectors.toList()));
+        assertEquals(1,userService.searchUserByAge(age).size());
+
+    }
+    @Test
+    public  void deleteUser(){
+        int id=2;
+        User user= new User("John","Male",25);
+        userService.deleteUser(id);
+        verify(userRepository,times(1)).deleteById(id);
+
+    }
 }
