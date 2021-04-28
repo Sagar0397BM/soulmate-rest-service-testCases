@@ -3,6 +3,7 @@ package com.stackroute.soulMateDemo.service;
 import com.stackroute.soulMateDemo.Domain.User;
 
 import com.stackroute.soulMateDemo.Exceptions.UserAlradyExistsException;
+import com.stackroute.soulMateDemo.Exceptions.UserNotFoundException;
 import com.stackroute.soulMateDemo.repository.UserRepository;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
@@ -73,7 +74,7 @@ class UserServiceTest {
 
     }
     @Test
-    public  void deleteUser(){
+    public  void deleteUser() throws UserNotFoundException {
         int id=2;
         User user= new User(1,"John","Male",25);
         userService.deleteUser(id);

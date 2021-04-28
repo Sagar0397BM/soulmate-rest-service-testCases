@@ -2,11 +2,13 @@ package com.stackroute.soulMateDemo.service;
 
 import com.stackroute.soulMateDemo.Domain.User;
 import com.stackroute.soulMateDemo.Exceptions.UserAlradyExistsException;
+import com.stackroute.soulMateDemo.Exceptions.UserNotFoundException;
 import com.stackroute.soulMateDemo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -34,7 +36,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public String deleteUser(int id) {
+    public String deleteUser(int id) throws NoSuchElementException {
+      Optional<User> myuser=userRepo.findById(id);
+      if(myuser.get().getId()!=id){
+          throw new NoSuchElementException();
+      }
         userRepo.deleteById(id);
         return "Success";
     }

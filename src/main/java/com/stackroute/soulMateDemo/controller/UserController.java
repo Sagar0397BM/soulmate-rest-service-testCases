@@ -3,6 +3,7 @@ package com.stackroute.soulMateDemo.controller;
 import com.stackroute.soulMateDemo.Domain.User;
 
 import com.stackroute.soulMateDemo.Exceptions.UserAlradyExistsException;
+import com.stackroute.soulMateDemo.Exceptions.UserNotFoundException;
 import com.stackroute.soulMateDemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -33,7 +35,7 @@ public class UserController {
         return  new ResponseEntity<List<User>>((List<User>) userService.getAllUser(),HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable int id){
+    public ResponseEntity<String> deleteUserById(@PathVariable int id) throws NoSuchElementException {
         userService.deleteUser(id);
         return new ResponseEntity<String>("Success",HttpStatus.OK);
     }
